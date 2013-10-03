@@ -35,9 +35,27 @@ app = lambda do |env|
       </body> 
     EOS
     nombre= req.params["name"]
-    res.write <<-"EOS"
-      <p>El nombre es #{nombre}</p>
-    EOS
+
+    #Almaceno ese usuario en la variable a_user
+    array = nombre.split
+    i = 0
+    num = array.size
+
+    while i < num  do 
+      a_user = Twitter.user(array[i])
+    
+      tweet = Twitter.user_timeline(a_user).first
+    
+      if tweet
+        res.write <<-"EOS"
+          <p>Usuario: #{array[i]}</p>     
+          <p>Último Tweet : #{tweet.text }</p>
+          <p>Fecha del Tweet : #{tweet.created_at}</P>
+          <p>Identificador del Tweet : #{tweet.id}</p>
+        EOS
+      end
+      i +=1
+    end
   else
     res.write <<-"EOS"
       <p>Escriba bien la url</p>
