@@ -25,12 +25,21 @@ app = lambda do |env|
           }
           h1 {color:white;}
           p {color:white;}
+          span {
+            font-weight: bold;
+	    font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+	    color: #FF7F24;
+          }
+          #explain {
+            font-size: 0.63em;
+          }
         </style>
       </head>
       <body>
-        <h1>Práctica 2 SYTW - Víctor Plaza Martín</h1>
+        <h1>Práctica 2 SYTW - Víctor Plaza Martín</h1></br>
         <form>
-          <p>Nombre del usario: <input type="text" name="name"></p><br>
+          <p>Nombre del usario: <input type="text" name="name"></p>
+          <p id=explain>Puedes poner una lista de usuarios separadas por espacios, ejemplo: timoreilly VictorPlazaM</p>
         </form> 
       </body> 
     EOS
@@ -38,26 +47,27 @@ app = lambda do |env|
 
     #Almaceno ese usuario en la variable a_user
     unless nombre.nil? || nombre == 0
-      array = nombre.split
-    
-    i = 0
-    num = array.size
+      
+      array = nombre.split 
+      i = 0
+      num = array.size
 
-    while i < num  do 
-      a_user = Twitter.user(array[i])
-    
-      tweet = Twitter.user_timeline(a_user).first
-    
-      if tweet
-        res.write <<-"EOS"
-          <p>Usuario: #{array[i]}</p>     
-          <p>Último Tweet : #{tweet.text}</p>
-          <p>Fecha del Tweet : #{tweet.created_at}</P>
-          <p>Identificador del Tweet : #{tweet.id}</p>
-        EOS
+      while i < num  do 
+	a_user = Twitter.user(array[i])
+      
+	tweet = Twitter.user_timeline(a_user).first
+      
+	if tweet
+	  res.write <<-"EOS"
+	    </br></br>
+	    <p><span>Usuario: </span> #{array[i]}</p>     
+	    <p><span>Último Tweet: </span> #{tweet.text}</p>
+	    <p><span>Fecha del Tweet: </span> #{tweet.created_at}</P>
+	    <p><span>Identificador del Tweet: </span> #{tweet.id}</p>    
+	  EOS
+	end
+	i +=1
       end
-      i +=1
-    end
     end
   else
     res.write <<-"EOS"
