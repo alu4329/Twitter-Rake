@@ -37,24 +37,27 @@ app = lambda do |env|
     nombre= req.params["name"]
 
     #Almaceno ese usuario en la variable a_user
-    array = nombre.split
-    i = 0
-    num = array.size
+    unless nombre.nil? || nombre == 0
+      
+      array = nombre.split 
+      i = 0
+      num = array.size
 
-    while i < num  do 
-      a_user = Twitter.user(array[i])
-    
-      tweet = Twitter.user_timeline(a_user).first
-    
-      if tweet
-        res.write <<-"EOS"
-          <p>Usuario: #{array[i]}</p>     
-          <p>Último Tweet : #{tweet.text }</p>
-          <p>Fecha del Tweet : #{tweet.created_at}</P>
-          <p>Identificador del Tweet : #{tweet.id}</p>
-        EOS
+      while i < num  do 
+	a_user = Twitter.user(array[i])
+      
+	tweet = Twitter.user_timeline(a_user).first
+      
+	if tweet
+	  res.write <<-"EOS"
+	    <p>Usuario: #{array[i]}</p>     
+	    <p>Último Tweet : #{tweet.text}</p>
+	    <p>Fecha del Tweet : #{tweet.created_at}</P>
+	    <p>Identificador del Tweet : #{tweet.id}</p>
+	  EOS
+	end
+	i +=1
       end
-      i +=1
     end
   else
     res.write <<-"EOS"
@@ -66,4 +69,4 @@ end
 
 
 
-Rack::Handler::Thin.run app, :Port=>9297
+Rack::Handler::Thin.run app, :Port=>9300

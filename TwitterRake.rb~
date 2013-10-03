@@ -37,7 +37,9 @@ app = lambda do |env|
     nombre= req.params["name"]
 
     #Almaceno ese usuario en la variable a_user
-    array = nombre.split
+    unless nombre.nil? || nombre == 0
+      array = nombre.split
+    
     i = 0
     num = array.size
 
@@ -48,13 +50,14 @@ app = lambda do |env|
     
       if tweet
         res.write <<-"EOS"
-          <p>Usuario: #{a_user}</p>     
-          <p>Último Tweet : #{tweet.text }</p>
+          <p>Usuario: #{array[i]}</p>     
+          <p>Último Tweet : #{tweet.text}</p>
           <p>Fecha del Tweet : #{tweet.created_at}</P>
           <p>Identificador del Tweet : #{tweet.id}</p>
         EOS
       end
       i +=1
+    end
     end
   else
     res.write <<-"EOS"
@@ -66,4 +69,4 @@ end
 
 
 
-Rack::Handler::Thin.run app, :Port=>9297
+Rack::Handler::Thin.run app, :Port=>9300
