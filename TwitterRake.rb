@@ -1,3 +1,12 @@
+require 'rubygems'
+require 'twitter'
+require './configure'
+require 'rack'
+require 'thin'
+
+
+
+
 app = lambda do |env|
 
   req = Rack::Request.new env
@@ -9,10 +18,19 @@ app = lambda do |env|
       <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title> TwitRack </title>
+        <style type="text/css">
+          body {
+            background-image: url(http://img24.imageshack.us/img24/5495/wallp.jpg);
+	    text-align: center;
+          }
+          h1 {color:white;}
+          p {color:white;}
+        </style>
       </head>
       <body>
+        <h1>Práctica 2 SYTW - Víctor Plaza Martín</h1>
         <form>
-          Nombre del usario: <input type="text" name="name"><br>
+          <p>Nombre del usario: <input type="text" name="name"></p><br>
         </form> 
       </body> 
     EOS

@@ -15,7 +15,28 @@ app = lambda do |env|
   #Comprobar que el pathinfo de la url es el correcto
   if req.path_info == '/TwitRake'
     res.write <<-"EOS"
-      <p>Ha accedido correctamente a su página web</p>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title> TwitRack </title>
+        <style type="text/css">
+          body {
+            background-image: url(http://img24.imageshack.us/img24/5495/wallp.jpg);
+	    text-align: center;
+          }
+          h1 {color:white;}
+          p {color:white;}
+        </style>
+      </head>
+      <body>
+        <h1>Práctica 2 SYTW - Víctor Plaza Martín</h1>
+        <form>
+          Nombre del usario: <input type="text" name="name"><br>
+        </form> 
+      </body> 
+    EOS
+    nombre= req.params["name"]
+    res.write <<-"EOS"
+      <p>El nombre es #{nombre}</p>
     EOS
   else
     res.write <<-"EOS"
