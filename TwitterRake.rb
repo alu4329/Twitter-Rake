@@ -48,7 +48,8 @@ app = lambda do |env|
     #Almaceno ese usuario en la variable a_user
     unless nombre.nil? || nombre == 0
       
-      array = nombre.split 
+      array = nombre.split.sort
+      
       i = 0
       num = array.size
 

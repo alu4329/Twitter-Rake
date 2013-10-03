@@ -38,7 +38,7 @@ app = lambda do |env|
       <body>
         <h1>Práctica 2 SYTW - Víctor Plaza Martín</h1></br>
         <form>
-          <p>Nombre del usario: <input type="text" name="name"></p>
+          <p>Nombre del usario/usuarios: <input type="text" name="name"></p>
           <p id=explain>Puedes poner una lista de usuarios separadas por espacios, ejemplo: timoreilly VictorPlazaM</p>
         </form> 
       </body> 
@@ -48,7 +48,8 @@ app = lambda do |env|
     #Almaceno ese usuario en la variable a_user
     unless nombre.nil? || nombre == 0
       
-      array = nombre.split 
+      array = nombre.split
+      array.sort!
       i = 0
       num = array.size
 
