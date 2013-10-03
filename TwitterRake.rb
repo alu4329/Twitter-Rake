@@ -1,12 +1,3 @@
-require 'rubygems'
-require 'twitter'
-require './configure'
-require 'rack'
-require 'thin'
-
-
-
-
 app = lambda do |env|
 
   req = Rack::Request.new env
@@ -15,7 +6,19 @@ app = lambda do |env|
   #Comprobar que el pathinfo de la url es el correcto
   if req.path_info == '/TwitRake'
     res.write <<-"EOS"
-      <p>Ha accedido correctamente a su página web</p>
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title> TwitRack </title>
+      </head>
+      <body>
+        <form>
+          Nombre del usario: <input type="text" name="name"><br>
+        </form> 
+      </body> 
+    EOS
+    nombre= req.params["name"]
+    res.write <<-"EOS"
+      <p>El nombre es #{nombre}</p>
     EOS
   else
     res.write <<-"EOS"
