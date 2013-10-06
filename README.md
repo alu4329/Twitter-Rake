@@ -24,3 +24,8 @@ Convierta el programa de ejemplo usado en la sección Ejemplo en Ruby: Accediend
 
 Al contar con un archivo Rakefile, la ejecución de la práctica se realiza de manera sencilla a través del comando "Rake" ya que el método esta declarado para default. 
 Se ha desarrollado una aplicación de servicio web a través del host que nos proporciona Thin por el cual un usuario puede ver el último tweet de uno o varios usuarios de manera ordenada.
+
+
+#### Link para visualizar la aplicación
+
+localhost:9300/TwitRake
